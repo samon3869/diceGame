@@ -1,14 +1,30 @@
+import { useState } from 'react';
 import Button from './Button.js';
 import Dice from './Dice.js';
 
+function random(n) {
+	return Math.ceil(Math.random() * n);
+}
+
 function App() {
+	const [num, setNum] = useState(1);
+
+	const handleRollClick = () => {
+		const nextNum = random(6);
+		setNum(nextNum);
+	};
+
+	const handleClearClick = () => {
+		setNum(1);
+	};
+
 	return (
 		<div>
 			<div>
-				<Button>던지기</Button>
-				<Button>처음부터</Button>
+				<Button onClick={handleRollClick}>던지기</Button>
+				<Button onClick={handleClearClick}>처음부터</Button>
 			</div>
-			<Dice color='blue' num ={2} />
+			<Dice color='blue' num ={num} />
 		</div>
 	);
 }
